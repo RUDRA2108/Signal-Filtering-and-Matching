@@ -18,6 +18,7 @@ This Python script is designed to infer the type of filtering (Low Pass, High Pa
 3. Install the required dependencies by running the following command:
    ```
    pip install numpy
+   pip install matplotlib
    ```
 
 ### Running the Script
