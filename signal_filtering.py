@@ -25,31 +25,14 @@ def mean_normalized_correlation(signal, filtered_signal):
 # Step 7: Plot input signal, actual output signal, and filtered output signal
 def plot_signals(input_signal, output_signal, filtered_signal, filter_name):
     plt.figure(figsize=(10, 6))
-    plt.subplot(3, 1, 1)
     plt.plot(input_signal, label='Input Signal')
-    plt.xlabel('Time')
-    plt.ylabel('Amplitude')
-    plt.title('Input Signal')
-    plt.legend()
-    plt.grid(True)
-    
-    plt.subplot(3, 1, 2)
     plt.plot(output_signal, label='Actual Output Signal')
-    plt.xlabel('Time')
-    plt.ylabel('Amplitude')
-    plt.title('Actual Output Signal')
-    plt.legend()
-    plt.grid(True)
-    
-    plt.subplot(3, 1, 3)
     plt.plot(filtered_signal, label=f'{filter_name} Filtered Signal')
     plt.xlabel('Time')
     plt.ylabel('Amplitude')
-    plt.title(f'{filter_name} Filtered Signal')
+    plt.title('Comparison of Input, Actual Output, and Filtered Output')
     plt.legend()
     plt.grid(True)
-    
-    plt.tight_layout()
     plt.show()
 
 # Step 8: Print input signal
