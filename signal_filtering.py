@@ -20,19 +20,37 @@ def band_pass_filter(signal):
 # Step 6: Calculate mean normalized correlation for each filter
 def mean_normalized_correlation(signal, filtered_signal):
     corr = np.correlate(signal, filtered_signal, mode='same')
-    return np.mean(corr / (np.sqrt(np.sum(signal*2)) * np.sqrt(np.sum(filtered_signal*2))))
+    corr = corr / np.linalg.norm(signal) / np.linalg.norm(filtered_signal)
+    return np.mean(corr)
 
 # Step 7: Plot input signal, actual output signal, and filtered output signal
 def plot_signals(input_signal, output_signal, filtered_signal, filter_name):
     plt.figure(figsize=(10, 6))
+    plt.subplot(3, 1, 1)
     plt.plot(input_signal, label='Input Signal')
+    plt.xlabel('Time')
+    plt.ylabel('Amplitude')
+    plt.title('Input Signal')
+    plt.legend()
+    plt.grid(True)
+
+    plt.subplot(3, 1, 2)
     plt.plot(output_signal, label='Actual Output Signal')
+    plt.xlabel('Time')
+    plt.ylabel('Amplitude')
+    plt.title('Actual Output Signal')
+    plt.legend()
+    plt.grid(True)
+
+    plt.subplot(3, 1, 3)
     plt.plot(filtered_signal, label=f'{filter_name} Filtered Signal')
     plt.xlabel('Time')
     plt.ylabel('Amplitude')
-    plt.title('Comparison of Input, Actual Output, and Filtered Output')
+    plt.title(f'{filter_name} Filtered Signal')
     plt.legend()
     plt.grid(True)
+
+    plt.tight_layout()
     plt.show()
 
 # Step 8: Print input signal
@@ -51,8 +69,8 @@ def print_filtered_signal(signal, filter_name):
     print(signal)
 
 # Read input and output signals from files
-x_t = read_signal('INPUT-SIGNAL-X(t).txt')
-y_t = read_signal('OUTPUT-SIGNAL-Y(t).txt')
+x_t = read_signal('/content/Signal-Filtering-and-Matching/INPUT-SIGNAL-X(t).txt')
+y_t = read_signal('/content/Signal-Filtering-and-Matching/OUTPUT-SIGNAL-Y(t).txt')
 
 # Convolve each filter with the input signal
 ylp_t = low_pass_filter(x_t)
